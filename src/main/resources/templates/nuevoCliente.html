@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/css/bootstrap.css">
+</head>
+<body>
+<h1 class="mb-4">Nuevo cliente</h1>
+
+<form action="/clientes/guardar" method="post" th:object="${cliente}">
+	<label class="col-sm-1">Id:</label>
+	<input class="col-sm-2 mb-3" type="text" name="id" th:field="*{id}">
+	<br>
+	<label class="col-sm-1">Nombre:</label>
+	<input class="col-sm-2 mb-3 is-invalid" type="text" name="nombre" th:field="*{nombre}">
+	<div th:errors="*{nombre}" class="invalid-feedback"></div>
+	<br>
+	<label class="col-sm-1">Ciudad:</label>
+	<input class="col-sm-2 mb-3 is-invalid" type="text" name="ciudad" th:field="*{ciudad}">
+	<div th:errors="*{ciudad}" class="invalid-feedback"></div>
+	<br>
+	<label class="col-sm-1">Credito:</label>
+	<input class="col-sm-2 mb-3 is-invalid" type="text" name="credito" th:field="*{credito}">
+	<div th:errors="*{credito}" class="invalid-feedback"></div>
+	<br>
+	<label class="col-sm-1">Tipo:</label>
+	<select class="col-sm-2 mb-3" th:field="*{tipo}" name="tipo">
+		<option th:each="tipo : ${tipos}" th:value="${tipo.id}" th:text="${tipo.tipo}">
+			
+		</option>
+	</select>
+	<br>
+	<button class="btn btn-primary">Guardar</button>
+	<a href="/clientes" class="btn btn-secondary">Cancelar</a>
+	
+</form>
+</body>
+</html>

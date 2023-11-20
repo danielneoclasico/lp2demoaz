@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/css/bootstrap.css">
+</head>
+<body>
+<h1>Editar cliente</h1>
+<!-- <form th:action="@{/clientes/editar/{id}(id=${cliente.id})}" method="post" th:object="${cliente}" >-->
+<form action="/clientes/editar" method="post" th:object="${cliente}" >
+	<label>Id:</label>
+	<input type="text" name="id" th:field="*{id}">
+	<br>
+	<label>Nombre:</label>
+	<input type="text" name="nombre" th:field="*{nombre}">
+	<br>
+	<label>Ciudad:</label>
+	<input type="text" name="ciudad" th:field="*{ciudad}">
+	<br>
+	<label>Credito:</label>
+	<input type="text" name="credito" th:field="*{credito}">
+	<br>
+	<label>Tipo:</label>
+	<select th:field="*{tipo}" name="tipo">
+		<option th:each="tipo : ${tipos}" th:value="${tipo.id}" th:text="${tipo.tipo}">
+			
+		</option>
+	</select>
+	<br>
+	<button>Guardar</button>
+	<a href="/clientes">Cancelar</a>
+</form>
+</body>
+</html>

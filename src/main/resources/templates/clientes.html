@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/css/bootstrap.css">
+</head>
+<body>
+<div id="msj" style="display: none;">
+	<span th:text="${mensaje}"></span>
+</div>
+<div th:if="${mensaje != null}" class="alert alert-success alert-dismissible fade show" role="alert">
+	<span th:text="${mensaje}"></span>
+	<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+<h1>Listado de clientes</h1>
+<a href="/clientes/nuevo">Nuevo</a>
+<table class="table table-striped">
+	<thead>
+		<th>Id</th>
+		<th>Nombre</th>
+		<th>Ciudad</th>
+		<th>Credito</th>
+		<th></th>
+	</thead>
+	<tbody class="table-group-divider">
+		<tr th:each="cliente : ${listaClientes}">
+			<td th:text="${cliente.id}"></td>
+			<td th:text="${cliente.nombre}"></td>
+			<td th:text="${cliente.ciudad}"></td>
+			<td th:text="${cliente.credito}"></td>
+			<td>
+				<a th:href="@{/clientes/editar/{id}(id=${cliente.id})}">Editar</a>
+				<a th:href="@{/clientes/borrar/{id}(id=${cliente.id})}" onclick="confirmarEliminar(this,event)">Borrar</a>	
+			</td>
+		</tr>
+		
+	</tbody>
+</table>
+<nav>
+	<ul class="pagination">
+		<li class="page-item" th:each="pagina:${paginas}">
+			<a class="page-link" th:href="@{/clientes?pagina={p}(p=${pagina})}" th:text="${pagina}"></a>
+		</li>
+	</ul>
+</nav>
+<script>
+	
+	function confirmarEliminar(elm,e){
+		e.preventDefault();
+		let rpta=confirm("Seguro de eliminar?")
+		if (rpta){
+			window.location.href=elm.href
+		}
+	}
+	
+	function mostrarMensaje(){
+		elmMsj=document.getElementById("msj")
+		if (elmMsj)
+			alert(elmMsj.innerHTML)	
+		//elmMsj.innerHTML=""
+	}
+	setTimeout(mostrarMensaje,1000)
+	
+</script>
+<script src="/js/bootstrap.js"></script>
+</body>
+</html>
