@@ -31,6 +31,11 @@ public class ClienteControlador {
 	ClienteRepositorio cr;
 	@Autowired
 	TipoClienteRepositorio tcr;
+	
+	@GetMapping("/saluda")
+	public String saludar() {
+		return "saludo";
+	}
 
 	@GetMapping("/clientes")
 	public String listar(@RequestParam(name="pagina",defaultValue = "1") int pagina, Model modelo) {
